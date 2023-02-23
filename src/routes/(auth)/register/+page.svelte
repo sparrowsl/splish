@@ -1,7 +1,7 @@
 <script>
 	import { applyAction, enhance } from '$app/forms';
-	import Button from '../lib/components/shared/Button.svelte';
-	import Input from '../lib/components/shared/Input.svelte';
+	import Button from '../../../lib/components/shared/Button.svelte';
+	import Input from '../../../lib/components/shared/Input.svelte';
 
 	export let form;
 </script>
