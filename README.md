@@ -15,10 +15,10 @@ A Simple Online Marketplace where users can sell and buy new and used items and 
 - [Acknowledgments](#acknowledgments)
 - [Contribution](#contribution)
 
-- Packages
+- Extra Packages
   - Zod - For validation
   - dayjs - Date and time formating
-  - md5 - Generating hash for user avatars
+  - md5 - Generating hash from email for user avatars
   - bcrypt - Generate hash for storing passwords
   - nanoid - Generate unique id _(faster than uuid)_
 
@@ -55,7 +55,7 @@ Users should be able to:
 - Semantic HTML5 / CSS
 - [SvelteKit](https://kit.svelte.dev) - JavaScript Svelte Meta Framework
 - [Prisma](https://prisma.io) - Nodejs ORM
-- [TailwindCSS](https://tailwindcss.com/) - CSS Framework
+- [UnoCSS](https://github.com/unocss/unocss) - CSS Engine, also makes use of other CSS frameworks
 - [Iconify Icons](https://iconify.design/) - For Icons
 - [SQLite](https://www.sqlite.org/) - For dev database
 
