@@ -15,5 +15,5 @@
 	{placeholder}
 	{disabled}
 	on:input={(e) => (value = e.target.value)}
-	class="{classes} block rounded border p-2 text-sm"
+	class="{classes} block w-full rounded border p-2 text-sm"
 />

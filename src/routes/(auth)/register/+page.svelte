@@ -25,8 +25,18 @@
 		<legend class="mb-5 text-center text-xl font-bold text-gray-700">Register</legend>
 
 		<div>
+			<label for="" class="block text-sm text-gray-600">Name</label>
+			<Input type="text" name="name" placeholder="John Doe" />
+		</div>
+
+		<div>
+			<label for="" class="block text-sm text-gray-600">Username</label>
+			<Input type="text" name="username" placeholder="johndoe" />
+		</div>
+
+		<div>
 			<label for="" class="block text-sm text-gray-600">Email</label>
-			<Input type="email" name="email" placeholder="john@gmail.com" />
+			<Input type="email" name="email" placeholder="john@gmail.com" required={false} />
 		</div>
 
 		<div>
@@ -38,7 +48,7 @@
 			<small class="text-center italic text-red-500">{form.error}</small>
 		{/if}
 
-		<Button>Register</Button>
+		<Button classes="opensans">Register</Button>
 	</fieldset>
 
 	<small class="mt-3 block text-center text-gray-500">

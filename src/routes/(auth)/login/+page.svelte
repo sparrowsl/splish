@@ -39,7 +39,7 @@
 			<small class="text-center italic text-red-500">{form.error}</small>
 		{/if}
 
-		<Button>Login</Button>
+		<Button classes="opensans">Login</Button>
 	</fieldset>
 
 	<small class="mt-3 block text-center text-gray-500">
