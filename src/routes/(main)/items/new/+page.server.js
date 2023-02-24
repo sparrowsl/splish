@@ -1,13 +1,46 @@
 import prisma from '../../../../lib/utils/prisma.js';
 
-/** @type {import('./$types').PageServerLoad} */
-export async function load() {
-	const categories = await prisma.category.findMany({
-		select: {
-			name: true
-		}
+async function seedCategories() {
+	await prisma.category.deleteMany();
+
+	const res = await fetch('https://dummyjson.com/products/categories');
+	const data = await res.json();
+
+	const categories = [...['clothes', 'trousers', 'pants', 'shorts'], ...data];
+
+	categories.forEach(async (cat) => {
+		await prisma.category.create({
+			data: {
+				id: crypto.randomUUID(),
+				name: cat
+			}
+		});
 	});
-	return { categories: categories.map((category) => category.name) };
+}
+
+async function getProducts() {
+	const res = await fetch(
+		'https://dummyjson.com/products?limit=100&select=title,price,category,description,thumbnail'
+	);
+	const { products } = await res.json();
+
+	// const thumbnails = products.map((product) => ({
+	// 	name: product.title,
+	// 	price: product.price,
+	// 	image: product.thumbnail,
+	// 	description: product.description,
+	// 	category: product.category
+	// }));
+	console.log(products);
+}
+
+/** @type {import('./$types').PageServerLoad} */
+export async function load({}) {
+	// seedCategories();
+	// getProducts();
+
+	const categories = await prisma.category.findMany();
+	return { categories };
 }
 
 /** @type {import('./$types').Actions} */
@@ -15,11 +48,23 @@ export const actions = {
 	default: async ({ request }) => {
 		const form = await request.formData();
 		const name = form.get('name');
-		const price = form.get('price');
+		const price = form.get('price') * 1;
 		const image = form.get('image');
 		const description = form.get('description');
-		const category = form.get('category');
+		const categoryId = form.get('category');
 
-		console.log({ name, price, image, description, category });
+		const item = await prisma.item.create({
+			data: {
+				id: crypto.randomUUID(),
+				name,
+				price,
+				image,
+				description,
+				categoryId
+			}
+		});
+
+		console.log(item);
+		// console.log({ name, price, image, description, categoryId });
 	}
 };
