@@ -60,11 +60,11 @@ export const actions = {
 				price,
 				image,
 				description,
-				categoryId
+				categoryId,
+				dateCreated: new Date()
 			}
 		});
 
 		console.log(item);
-		// console.log({ name, price, image, description, categoryId });
 	}
 };
