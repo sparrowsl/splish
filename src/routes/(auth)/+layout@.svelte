@@ -1,3 +1,3 @@
-<main class="roboto grid h-screen place-content-center bg-gray-200">
+<main class="h-screen bg-gray-200 grid roboto place-content-center">
 	<slot />
 </main>

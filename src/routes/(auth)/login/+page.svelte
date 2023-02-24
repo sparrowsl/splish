@@ -12,8 +12,8 @@
 
 <form
 	action=""
-	method="POST"
-	class="rounded-md bg-white px-7 py-5"
+	method="post"
+	class="bg-white rounded-md min-w-80 py-5 px-7"
 	use:enhance={({ form }) => {
 		return async ({ result, update }) => {
 			if (result.type === 'success') form.reset();
@@ -23,28 +23,28 @@
 	}}
 >
 	<fieldset class="grid gap-5">
-		<legend class="mb-5 text-center text-xl font-bold text-gray-700">Login</legend>
+		<legend class="font-bold text-center text-xl mb-5 text-gray-700">Login</legend>
 
 		<div>
-			<label for="" class="block text-sm text-gray-600">Email</label>
+			<label for="" class="text-sm text-gray-600 block">Email</label>
 			<Input type="email" name="email" placeholder="john@gmail.com" />
 		</div>
 
 		<div>
-			<label for="" class="block text-sm text-gray-600">Password</label>
+			<label for="" class="text-sm text-gray-600 block">Password</label>
 			<Input type="password" name="password" placeholder="password" />
 		</div>
 
 		{#if form?.error}
-			<small class="text-center italic text-red-500">{form.error}</small>
+			<small class="text-center text-red-500 italic">{form.error}</small>
 		{/if}
 
-		<Button classes="opensans">Login</Button>
+		<Button type="submit" classes="opensans">Login</Button>
 	</fieldset>
 
-	<small class="mt-3 block text-center text-gray-500">
+	<small class="mt-3 text-center text-gray-500 block">
 		Need an account? <a href="/register" class="text-xs text-blue-400">register here</a>
 	</small>
 </form>
 
-<a href="/" class="mt-5 block text-center text-xs text-blue-600 opacity-60">Back Home</a>
+<a href="/" class="mt-5 text-center text-xs opacity-60 text-blue-600 block">Back Home</a>

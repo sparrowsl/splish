@@ -6,16 +6,16 @@
 	<title>Welcome | Splish 🛒</title>
 </svelte:head>
 
-<main class="roboto">
-	<section class="grid h-screen place-content-center">
+<main>
+	<section class="h-screen grid place-content-center">
 		<Icon
 			icon="healthicons:market-stall-outline"
 			class="mx-auto animate-pulse text-7xl text-gray-700"
 		/>
-		<h1 class="mb-1 text-3xl font-bold text-gray-800">Welcome to Splish 🛒</h1>
-		<p class="text-center italic text-gray-500">A small simple online marketplace</p>
+		<h1 class="font-bold mb-1 text-3xl text-gray-800">Welcome to Splish 🛒</h1>
+		<p class="text-center text-gray-500 italic">A small simple online marketplace</p>
 
-		<div class="opensans mx-auto mt-5 flex items-center gap-8">
+		<div class="flex mx-auto mt-5 gap-8 opensans items-center">
 			<a href="/login" class="text-blue-500 hover:text-blue-700">Login</a>
 			<a href="/register" class="text-blue-500 hover:text-blue-700">Register</a>
 		</div>
