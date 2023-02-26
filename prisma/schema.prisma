@@ -6,9 +6,17 @@ generator client {
 }
 
 datasource db {
-  //  postgresql, mysql, sqlite, sqlserver, mongodb
-  provider = "sqlite"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
+}
+
+model User {
+  id       String  @unique @default(uuid())
+  name     String?
+  username String  @unique
+  email    String  @unique
+  password String
+  items    Item[]
 }
 
 model Category {
@@ -26,5 +34,7 @@ model Item {
   dateCreated DateTime @default(now())
 
   categoryId String?
-  category   Category? @relation(fields: [categoryId], references: [id])
+  Category   Category? @relation(fields: [categoryId], references: [id])
+  userId     String?
+  User       User?     @relation(fields: [userId], references: [id])
 }

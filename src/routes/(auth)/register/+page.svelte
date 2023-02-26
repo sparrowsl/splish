@@ -25,8 +25,8 @@
 		<legend class="font-bold text-center text-xl mb-5 text-gray-700">Register</legend>
 
 		<div>
-			<label for="" class="text-sm text-gray-600 block">Name</label>
-			<Input type="text" name="name" placeholder="John Doe" />
+			<label for="" class="text-sm text-gray-600 block">Name (optional)</label>
+			<Input type="text" name="name" placeholder="John Doe" required={false} />
 		</div>
 
 		<div>
@@ -35,7 +35,7 @@
 		</div>
 
 		<div>
-			<label for="" class="text-sm text-gray-600 block">Email</label>
+			<label for="" class="text-sm text-gray-600 block">Email (optional)</label>
 			<Input type="email" name="email" placeholder="john@gmail.com" required={false} />
 		</div>
 

@@ -2,8 +2,6 @@
 	export let data;
 </script>
 
-<h1 class="text-3xl">Recent Items</h1>
-
 <section class="grid gap-10 grid-cols-4">
 	{#each data.items as item}
 		<figure class="border rounded shadow hover:shadow-lg">
