@@ -4,17 +4,22 @@
 	export let data;
 </script>
 
-<Aside />
-<section class="grid gap-10 grid-cols-4">
-	{#each data.items as item}
-		<figure class="border rounded shadow hover:shadow-lg">
-			<img src={item.image} alt={item.name} class="bg-center bg-cover h-56 w-full" />
-			<figcaption class="p-3">
-				<h3>{item.name}</h3>
-				<p>${item.price.toLocaleString()}</p>
-			</figcaption>
-		</figure>
-	{:else}
-		<p>No Items added yet!!</p>
-	{/each}
+<section class="grid gap-5 grid-cols-[max-content_1fr]">
+	<Aside />
+
+	<div class="grid gap-10 grid-cols-4">
+		{#each data.items as item (item.id)}
+			<a href="/items/{item.id}">
+				<figure class="border rounded h-fit shadow hover:shadow-lg">
+					<img src={item.image} alt={item.name} class="object-center h-52 w-full" />
+					<figcaption class="p-3">
+						<h3>{item.name}</h3>
+						<p>${item.price.toLocaleString()}</p>
+					</figcaption>
+				</figure>
+			</a>
+		{:else}
+			<p>No Items added yet!!</p>
+		{/each}
+	</div>
 </section>

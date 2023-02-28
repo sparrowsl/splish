@@ -45,7 +45,7 @@ export async function load({}) {
 
 /** @type {import('./$types').Actions} */
 export const actions = {
-	default: async ({ request }) => {
+	default: async ({ request, locals }) => {
 		const form = await request.formData();
 		const name = form.get('name');
 		const price = form.get('price') * 1;
@@ -55,6 +55,7 @@ export const actions = {
 
 		const item = await prisma.item.create({
 			data: {
+				userId: locals.user.id,
 				id: crypto.randomUUID(),
 				name,
 				price,

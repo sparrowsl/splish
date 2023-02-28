@@ -6,6 +6,14 @@ export async function load() {
 		// take: 15,
 		orderBy: {
 			dateCreated: 'desc'
+		},
+		include: {
+			User: {
+				select: {
+					name: true,
+					username: true
+				}
+			}
 		}
 	});
 	return { items };
