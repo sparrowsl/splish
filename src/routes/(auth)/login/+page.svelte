@@ -29,8 +29,8 @@
 		<legend class="font-bold text-center text-xl mb-5 text-gray-700">Login</legend>
 
 		<div>
-			<label for="" class="text-sm text-gray-600 block">Username</label>
-			<Input type="text" name="username" placeholder="Username" />
+			<label for="" class="text-sm text-gray-600 block">Username or Email</label>
+			<Input type="text" name="username" placeholder="Username or Email" />
 		</div>
 
 		<div>

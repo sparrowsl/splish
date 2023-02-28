@@ -12,11 +12,21 @@ export const actions = {
 		const username = form.get('username');
 		const password = form.get('password');
 
-		const user = await prisma.user.findUnique({
-			where: {
-				username
-			}
-		});
+		let user = false;
+		if (username.includes('@')) {
+			user = await prisma.user.findUnique({
+				where: {
+					email: username
+				}
+			});
+		} else {
+			user = await prisma.user.findUnique({
+				where: {
+					username
+				}
+			});
+		}
+
 		if (!user) return { error: 'Invalid username and password!!' };
 
 		const validPassword = await bcrypt.compare(password, user.password);
