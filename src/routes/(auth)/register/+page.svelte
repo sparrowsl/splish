@@ -4,6 +4,7 @@
 	import Input from '../../../lib/components/shared/Input.svelte';
 
 	export let form;
+	let loading = false;
 </script>
 
 <svelte:head>
@@ -14,10 +15,12 @@
 	class="bg-white rounded-md min-w-80 py-5 px-7"
 	method="POST"
 	use:enhance={({ form }) => {
+		loading = true;
 		return async ({ result, update }) => {
 			if (result.type === 'success') form.reset();
 			if (result.type === 'invalid') await applyAction(form);
 			update();
+			loading = false;
 		};
 	}}
 >
@@ -48,7 +51,13 @@
 			<small class="text-center text-red-500 italic">{form.error}</small>
 		{/if}
 
-		<Button type="submit" classes="opensans">Register</Button>
+		<Button
+			type="submit"
+			disabled={loading}
+			classes="opensans {loading ? 'animate-pulse disabled:cursor-wait' : ''}"
+		>
+			{loading ? '...' : 'Register'}
+		</Button>
 	</fieldset>
 
 	<small class="mt-3 text-center text-gray-500 block">

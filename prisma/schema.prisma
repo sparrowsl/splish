@@ -16,6 +16,7 @@ model User {
   username String  @unique
   email    String  @unique
   password String
+  isAdmin  Boolean @default(false)
   items    Item[]
 }
 
@@ -34,7 +35,7 @@ model Item {
   dateCreated DateTime @default(now())
 
   categoryId String?
-  Category   Category? @relation(fields: [categoryId], references: [id])
+  Category   Category? @relation(fields: [categoryId], references: [id], onDelete: Cascade)
   userId     String?
-  User       User?     @relation(fields: [userId], references: [id])
+  User       User?     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }

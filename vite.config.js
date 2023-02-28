@@ -1,7 +1,7 @@
 import { sveltekit } from '@sveltejs/kit/vite';
 import { defineConfig } from 'vite';
 import UnoCSS from 'unocss/vite';
-import { extractorSvelte } from 'unocss';
+import { extractorSvelte, presetUno } from 'unocss';
 
 export default defineConfig({
 	plugins: [
@@ -11,7 +11,8 @@ export default defineConfig({
 			rules: [
 				['opensans', { 'font-family': ['Open Sans', 'sans-serif'] }],
 				['roboto', { 'font-family': ['Roboto', 'sans-serif'] }]
-			]
+			],
+			presets: [presetUno()]
 		})
 	]
 });
