@@ -11,7 +11,7 @@ datasource db {
 }
 
 model User {
-  id       String  @unique @default(uuid())
+  id       String  @id @unique @default(uuid())
   name     String?
   username String  @unique
   email    String  @unique
@@ -21,13 +21,13 @@ model User {
 }
 
 model Category {
-  id    String @unique @default(uuid())
+  id    String @id @unique @default(uuid())
   name  String @unique
   items Item[]
 }
 
 model Item {
-  id          String   @unique @default(uuid())
+  id          String   @id @unique @default(uuid())
   name        String
   price       Int      @default(0)
   image       String?  @default("https://via.placeholder.com/150")

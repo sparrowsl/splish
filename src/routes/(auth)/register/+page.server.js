@@ -16,17 +16,13 @@ export const actions = {
 
 		// Check if username exists
 		const usernameExists = await prisma.user.findUnique({
-			where: {
-				username
-			}
+			where: { username }
 		});
 		if (usernameExists) return { error: 'Username already exists!!' };
 
 		// Check if username exists
 		const emailExists = await prisma.user.findUnique({
-			where: {
-				email
-			}
+			where: { email }
 		});
 		if (emailExists) return { error: 'Email already exists!!' };
 

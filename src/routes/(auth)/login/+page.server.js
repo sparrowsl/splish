@@ -15,15 +15,11 @@ export const actions = {
 		let user = false;
 		if (username.includes('@')) {
 			user = await prisma.user.findUnique({
-				where: {
-					email: username
-				}
+				where: { email: username }
 			});
 		} else {
 			user = await prisma.user.findUnique({
-				where: {
-					username
-				}
+				where: { username }
 			});
 		}
 
