@@ -1,16 +1,18 @@
 <script>
+	import { page } from '$app/stores';
 	import Aside from './Aside.svelte';
 
 	export let data;
+	$: console.log($page.url.searchParams.get('category') || null);
 </script>
 
 <section class="grid gap-5 grid-cols-[max-content_1fr]">
-	<Aside />
+	<Aside categories={data.categories} />
 
 	<div class="grid gap-10 grid-cols-4">
 		{#each data.items as item (item.id)}
-			<a href="/items/{item.id}">
-				<figure class="border rounded h-fit shadow hover:shadow-lg">
+			<a href="/items/{item.id}" class="h-fit">
+				<figure class="border rounded shadow hover:shadow-lg">
 					<img src={item.image} alt={item.name} class="object-center h-52 w-full" />
 					<figcaption class="p-3">
 						<h3>{item.name}</h3>
