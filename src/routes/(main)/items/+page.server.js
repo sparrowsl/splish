@@ -1,20 +1,20 @@
-import prisma from '../../../lib/utils/prisma.js';
+import prisma from "../../../lib/server/prisma.js";
 
 /** @type {import('./$types').PageServerLoad} */
 export async function load() {
 	const items = await prisma.item.findMany({
 		// take: 15,
 		orderBy: {
-			dateCreated: 'desc'
+			dateCreated: "desc",
 		},
 		include: {
 			User: {
 				select: {
 					name: true,
-					username: true
-				}
-			}
-		}
+					username: true,
+				},
+			},
+		},
 	});
 	return { items };
 }

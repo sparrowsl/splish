@@ -1,10 +1,10 @@
-import prisma from '../../../../lib/utils/prisma';
+import prisma from "../../../../lib/server/prisma";
 
 /** @type {import('./$types').PageServerLoad} */
 export async function load({ params }) {
 	const item = await prisma.item.findUnique({
 		where: {
-			id: params.id
+			id: params.id,
 		},
 		include: {
 			User: {
@@ -12,10 +12,10 @@ export async function load({ params }) {
 					id: true,
 					name: true,
 					username: true,
-					email: true
-				}
-			}
-		}
+					email: true,
+				},
+			},
+		},
 	});
 	return { item };
 }

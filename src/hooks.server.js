@@ -1,20 +1,20 @@
-import prisma from './lib/utils/prisma';
+import prisma from "./lib/server/prisma";
 
 export const handle = async ({ resolve, event }) => {
-	const session = event.cookies.get('splish');
+	const session = event.cookies.get("splish");
 	if (!session) return await resolve(event);
 
 	const user = await prisma.user.findUnique({
 		where: {
-			id: session
+			id: session,
 		},
 		select: {
 			email: true,
 			isAdmin: true,
 			id: true,
 			name: true,
-			username: true
-		}
+			username: true,
+		},
 	});
 
 	if (user) event.locals.user = user;

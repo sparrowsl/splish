@@ -1,17 +1,10 @@
-<script>
-	import Icon from '@iconify/svelte';
-</script>
-
 <svelte:head>
 	<title>Welcome | Splish 🛒</title>
 </svelte:head>
 
 <main>
 	<section class="h-screen grid place-content-center">
-		<Icon
-			icon="healthicons:market-stall-outline"
-			class="mx-auto animate-pulse text-7xl text-gray-700"
-		/>
+		<i class="mx-auto animate-pulse text-7xl text-gray-700 healthicons:market-stall-outline"></i>
 		<h1 class="font-bold mb-1 text-3xl text-gray-800">Welcome to Splish 🛒</h1>
 		<p class="text-center text-gray-500 italic">A small simple online marketplace</p>
 

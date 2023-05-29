@@ -1,6 +1,6 @@
-import { redirect } from '@sveltejs/kit';
-import bcrypt from 'bcrypt';
-import prisma from '../../../lib/utils/prisma.js';
+import { redirect } from "@sveltejs/kit";
+import bcrypt from "bcrypt";
+import prisma from "../../../lib/server/prisma.js";
 
 /** @type {import('./$types').PageServerLoad} */
 export async function load({}) {}
@@ -9,26 +9,26 @@ export async function load({}) {}
 export const actions = {
 	default: async ({ request, cookies }) => {
 		const form = await request.formData();
-		const name = form.get('name');
-		const username = form.get('username');
-		const email = form.get('email');
-		const password = form.get('password');
+		const name = form.get("name");
+		const username = form.get("username");
+		const email = form.get("email");
+		const password = form.get("password");
 
 		// Check if username exists
 		const usernameExists = await prisma.user.findUnique({
 			where: {
-				username
-			}
+				username,
+			},
 		});
-		if (usernameExists) return { error: 'Username already exists!!' };
+		if (usernameExists) return { error: "Username already exists!!" };
 
 		// Check if username exists
 		const emailExists = await prisma.user.findUnique({
 			where: {
-				email
-			}
+				email,
+			},
 		});
-		if (emailExists) return { error: 'Email already exists!!' };
+		if (emailExists) return { error: "Email already exists!!" };
 
 		// Create the user
 		const user = await prisma.user.create({
@@ -37,18 +37,18 @@ export const actions = {
 				name,
 				username,
 				email,
-				password: await bcrypt.hash(password, 10)
-			}
+				password: await bcrypt.hash(password, 10),
+			},
 		});
 
 		// Set cookies
-		cookies.set('splish', user.id, {
-			path: '/',
+		cookies.set("splish", user.id, {
+			path: "/",
 			httpOnly: true,
-			sameSite: 'strict',
-			maxAge: 60 * 60 * 24 * 7
+			sameSite: "strict",
+			maxAge: 60 * 60 * 24 * 7,
 		});
 
-		throw redirect(302, '/items');
-	}
+		throw redirect(302, "/items");
+	},
 };

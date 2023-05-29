@@ -1,26 +1,26 @@
-import prisma from '../../../../lib/utils/prisma.js';
+import prisma from "../../../../lib/server/prisma.js";
 
 async function seedCategories() {
 	await prisma.category.deleteMany();
 
-	const res = await fetch('https://dummyjson.com/products/categories');
+	const res = await fetch("https://dummyjson.com/products/categories");
 	const data = await res.json();
 
-	const categories = [...['clothes', 'trousers', 'pants', 'shorts'], ...data];
+	const categories = [...["clothes", "trousers", "pants", "shorts"], ...data];
 
 	categories.forEach(async (cat) => {
 		await prisma.category.create({
 			data: {
 				id: crypto.randomUUID(),
-				name: cat
-			}
+				name: cat,
+			},
 		});
 	});
 }
 
 async function getProducts() {
 	const res = await fetch(
-		'https://dummyjson.com/products?limit=100&select=title,price,category,description,thumbnail'
+		"https://dummyjson.com/products?limit=100&select=title,price,category,description,thumbnail"
 	);
 	const { products } = await res.json();
 
@@ -47,11 +47,11 @@ export async function load({}) {
 export const actions = {
 	default: async ({ request, locals }) => {
 		const form = await request.formData();
-		const name = form.get('name');
-		const price = form.get('price') * 1;
-		const image = form.get('image');
-		const description = form.get('description');
-		const categoryId = form.get('category');
+		const name = form.get("name");
+		const price = form.get("price") * 1;
+		const image = form.get("image");
+		const description = form.get("description");
+		const categoryId = form.get("category");
 
 		const item = await prisma.item.create({
 			data: {
@@ -62,10 +62,10 @@ export const actions = {
 				image,
 				description,
 				categoryId,
-				dateCreated: new Date()
-			}
+				dateCreated: new Date(),
+			},
 		});
 
 		console.log(item);
-	}
+	},
 };
