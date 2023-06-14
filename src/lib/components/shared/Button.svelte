@@ -5,8 +5,8 @@
 </script>
 
 <button
-	type="{type}"
-	disabled="{disabled}"
+	{type}
+	{disabled}
 	on:click
 	class="{$$props.class} block rounded bg-gray-700 p-2 text-sm text-white"
 >
