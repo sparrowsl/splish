@@ -9,24 +9,21 @@ export async function load({}) {}
 export const actions = {
 	default: async ({ request, cookies }) => {
 		const form = await request.formData();
-		const name = form.get("name");
-		const username = form.get("username");
-		const email = form.get("email");
-		const password = form.get("password");
+
+		const name = form.get("name")?.toString() ?? "";
+		const username = form.get("username")?.toString() ?? "";
+		const email = form.get("email")?.toString() ?? "";
+		const password = form.get("password")?.toString() ?? "";
 
 		// Check if username exists
 		const usernameExists = await prisma.user.findUnique({
-			where: {
-				username,
-			},
+			where: { username },
 		});
 		if (usernameExists) return { error: "Username already exists!!" };
 
 		// Check if username exists
 		const emailExists = await prisma.user.findUnique({
-			where: {
-				email,
-			},
+			where: { email },
 		});
 		if (emailExists) return { error: "Email already exists!!" };
 
