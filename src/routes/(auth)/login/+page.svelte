@@ -1,8 +1,9 @@
 <script>
-	import { applyAction, enhance } from '$app/forms';
-	import Button from '../../../lib/components/shared/Button.svelte';
-	import Input from '../../../lib/components/shared/Input.svelte';
+	import { applyAction, enhance } from "$app/forms";
+	import Button from "$lib/components/shared/Button.svelte";
+	import Input from "$lib/components/shared/Input.svelte";
 
+	/** @type {import('./$types').ActionData} */
 	export let form;
 	let loading = false;
 </script>
@@ -15,11 +16,11 @@
 	action=""
 	method="post"
 	class="bg-white rounded-md min-w-80 py-5 px-7"
-	use:enhance={({ form }) => {
+	use:enhance={({ formElement }) => {
 		loading = true;
 		return async ({ result, update }) => {
-			if (result.type === 'success') form.reset();
-			if (result.type === 'invalid') await applyAction(form);
+			if (result.type === "success") formElement.reset();
+			if (result.type === "failure") await applyAction(result);
 			update();
 			loading = false;
 		};
@@ -28,15 +29,15 @@
 	<fieldset class="grid gap-5">
 		<legend class="font-bold text-center text-xl mb-5 text-gray-700">Login</legend>
 
-		<div>
-			<label for="" class="text-sm text-gray-600 block">Username or Email</label>
-			<Input type="text" name="username" placeholder="Username or Email" />
-		</div>
+		<label for="" class="text-sm text-gray-600 block">
+			Email
+			<Input type="email" name="email" placeholder="Email" />
+		</label>
 
-		<div>
-			<label for="" class="text-sm text-gray-600 block">Password</label>
+		<label for="" class="text-sm text-gray-600 block">
+			Password
 			<Input type="password" name="password" placeholder="password" />
-		</div>
+		</label>
 
 		{#if form?.error}
 			<small class="text-center text-red-500 italic">{form.error}</small>
@@ -45,9 +46,9 @@
 		<Button
 			type="submit"
 			disabled={loading}
-			classes="opensans {loading ? 'animate-pulse disabled:cursor-wait' : ''}"
+			classes="opensans {loading && 'animate-pulse disabled:cursor-wait'}"
 		>
-			{loading ? '...' : 'Login'}
+			{loading ? "..." : "Login"}
 		</Button>
 	</fieldset>
 

@@ -27,34 +27,27 @@
 	}}
 >
 	<fieldset class="grid gap-5">
-		<legend class="font-bold text-center text-xl mb-5 text-gray-700">
-			Register
-		</legend>
+		<legend class="font-bold text-center text-xl mb-5 text-gray-700"> Register </legend>
 
-		<div>
-			<label for="" class="text-sm text-gray-600 block">Name (optional)</label>
+		<label for="" class="text-sm text-gray-600 block">
+			Name (optional)
 			<Input type="text" name="name" placeholder="John Doe" required={false} />
-		</div>
+		</label>
 
-		<div>
-			<label for="" class="text-sm text-gray-600 block">Username</label>
+		<label for="" class="text-sm text-gray-600 block">
+			Username
 			<Input type="text" name="username" placeholder="johndoe" />
-		</div>
+		</label>
 
-		<div>
-			<label for="" class="text-sm text-gray-600 block">Email (optional)</label>
-			<Input
-				type="email"
-				name="email"
-				placeholder="john@gmail.com"
-				required={false}
-			/>
-		</div>
+		<label for="" class="text-sm text-gray-600 block">
+			Email (optional)
+			<Input type="email" name="email" placeholder="john@gmail.com" required={false} />
+		</label>
 
-		<div>
-			<label for="" class="text-sm text-gray-600 block">Password</label>
+		<label for="" class="text-sm text-gray-600 block">
+			Password
 			<Input type="password" name="password" placeholder="password" />
-		</div>
+		</label>
 
 		{#if form?.error}
 			<small class="text-center text-red-500 italic">{form?.error}</small>
@@ -63,19 +56,15 @@
 		<Button
 			type="submit"
 			disabled={loading}
-			classes="opensans {loading ? 'animate-pulse disabled:cursor-wait' : ''}"
+			classes="opensans {loading && 'animate-pulse disabled:cursor-wait'}"
 		>
 			{loading ? "..." : "Register"}
 		</Button>
 	</fieldset>
 
 	<small class="mt-3 text-center text-gray-500 block">
-		Already have an account? <a href="/login" class="text-xs text-blue-400">
-			login here
-		</a>
+		Already have an account? <a href="/login" class="text-xs text-blue-400"> login here </a>
 	</small>
 </form>
 
-<a href="/" class="mt-5 text-center text-xs opacity-60 text-blue-600 block">
-	Back Home
-</a>
+<a href="/" class="mt-5 text-center text-xs opacity-60 text-blue-600 block"> Back Home </a>

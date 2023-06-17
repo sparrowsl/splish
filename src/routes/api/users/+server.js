@@ -5,10 +5,9 @@ import prisma from "$lib/server/prisma";
 /** @type {import('./$types').RequestHandler} */
 export async function POST({ request }) {
 	const { name, username, email, password } = await request.json();
-	let user = {};
 
 	try {
-		user = await prisma.user.create({
+		const user = await prisma.user.create({
 			data: {
 				name,
 				username,
@@ -18,6 +17,6 @@ export async function POST({ request }) {
 		});
 		return json(user);
 	} catch (error) {
-		return json({ error: "Could not create the user:" });
+		return json({ message: "Could not create the user:" });
 	}
 }

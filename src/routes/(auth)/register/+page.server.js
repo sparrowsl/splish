@@ -1,5 +1,5 @@
-import prisma from "$lib/server/prisma";
 import { redirect } from "@sveltejs/kit";
+import prisma from "$lib/server/prisma";
 
 /** @type {import('./$types').PageServerLoad} */
 export async function load({}) {}
@@ -13,15 +13,11 @@ export const actions = {
 		const email = form.get("email")?.toString() ?? "";
 		const password = form.get("password")?.toString() ?? "";
 
-		try {
-			// Check if username exists
-			await prisma.user.findFirst({
-				where: { username, email },
-			});
-		} catch (error) {
-			console.log(error);
-			return { error: "Username or Email already exists!!" };
-		}
+		// Check if username exists
+		const userExists = await prisma.user.findFirst({
+			where: { username, email },
+		});
+		if (userExists) return { error: "Username or Email already exists!!" };
 
 		const res = await fetch("/api/users", {
 			method: "POST",
@@ -29,18 +25,15 @@ export const actions = {
 		});
 		const data = await res.json();
 
-		if (!res.ok) return { error: data };
-
-		// return { message: data };
-		console.log(data);
+		if (!res.ok) return { error: data.message };
 
 		// Set cookies
-		// cookies.set("splish", user.id, {
-		// 	path: "/",
-		// 	httpOnly: true,
-		// 	sameSite: "strict",
-		// 	maxAge: 60 * 60 * 24 * 7,
-		// });
+		cookies.set("splish", data.id, {
+			path: "/",
+			httpOnly: true,
+			sameSite: "strict",
+			maxAge: 60 * 60 * 24 * 7,
+		});
 		throw redirect(302, "/items");
 	},
 };
