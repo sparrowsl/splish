@@ -1,6 +1,7 @@
 <script>
 	import Aside from "./Aside.svelte";
 
+	/** @type {import('./$types').PageData} */
 	export let data;
 </script>
 
@@ -11,11 +12,7 @@
 		{#each data.items as item (item.id)}
 			<a href="/items/{item.id}">
 				<figure class="border rounded h-fit shadow hover:shadow-lg">
-					<img
-						src={item.image}
-						alt={item.name}
-						class="object-center h-52 w-full"
-					/>
+					<img src={`/uploads/${item.image}`} alt={item.name} class="object-center h-52 w-full" />
 					<figcaption class="p-3">
 						<h3>{item.name}</h3>
 						<p>${item.price.toLocaleString()}</p>

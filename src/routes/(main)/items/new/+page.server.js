@@ -1,42 +1,24 @@
 import prisma from "$lib/server/prisma.js";
+import { uploadFile } from "$lib/utils/upload";
+import { redirect } from "@sveltejs/kit";
 
 async function seedCategories() {
 	await prisma.category.deleteMany();
 
-	const res = await fetch("https://dummyjson.com/products/categories");
-	const data = await res.json();
+	// const res = await fetch("https://dummyjson.com/products/categories");
+	// const data = await res.json();
 
-	const categories = [...["clothes", "trousers", "pants", "shorts"], ...data];
-
-	categories.forEach(async (cat) => {
+	// const categories = [...["clothes", "trousers", "pants", "shorts"], ...data];
+	["Clothes", "Furnitures", "Toys"].forEach(async (categ) => {
 		try {
-			await prisma.category.create({
-				data: { name: cat },
-			});
-		} catch {}
+			await prisma.category.create({ data: { name: categ } });
+		} catch (error) {}
 	});
-}
-
-async function getProducts() {
-	const res = await fetch(
-		"https://dummyjson.com/products?limit=100&select=title,price,category,description,thumbnail"
-	);
-	const { products } = await res.json();
-
-	// const thumbnails = products.map((product) => ({
-	// 	name: product.title,
-	// 	price: product.price,
-	// 	image: product.thumbnail,
-	// 	description: product.description,
-	// 	category: product.category
-	// }));
-	console.log(products);
 }
 
 /** @type {import('./$types').PageServerLoad} */
 export async function load({}) {
-	seedCategories();
-	// getProducts();
+	// seedCategories();
 
 	const categories = await prisma.category.findMany();
 	return { categories };
@@ -44,27 +26,30 @@ export async function load({}) {
 
 /** @type {import('./$types').Actions} */
 export const actions = {
-	default: async ({ request, locals }) => {
+	default: async ({ request, locals, fetch }) => {
 		const form = await request.formData();
 		const name = form.get("name")?.toString() ?? "";
 		const price = form.get("price")?.toString() ?? "";
-		const image = form.get("image")?.toString() ?? "";
+		const image = form.get("image");
 		const description = form.get("description")?.toString() ?? "";
 		const categoryId = form.get("category")?.toString() ?? "";
 
-		const item = await prisma.item.create({
-			data: {
-				userId: locals.user.id,
-				id: crypto.randomUUID(),
+		const res = await fetch("/api/items", {
+			method: "POST",
+			headers: { "Content-Type": "multipart/form-data" },
+			body: JSON.stringify({
+				userId: locals?.user?.id || "e228be3c-5a1d-4e84-950c-605aff9a9a23",
 				name,
 				price: Number(price),
-				image,
+				image: await uploadFile(image),
 				description,
 				categoryId,
-				dateCreated: new Date(),
-			},
+			}),
 		});
+		// const item = await res.json();
 
-		console.log(item);
+		if (!res.ok) return { error: "Could not upload the file or create new item!!" };
+
+		throw redirect(302, "/items");
 	},
 };
