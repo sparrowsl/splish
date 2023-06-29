@@ -12,7 +12,7 @@ export async function GET({}) {
 				},
 			},
 		});
-		return json(items);
+		return json({ items });
 	} catch (error) {
 		return json({ error: "Could not get any items" });
 	}
@@ -32,5 +32,5 @@ export async function POST({ request }) {
 			userId,
 		},
 	});
-	return json(item);
+	return json({ item });
 }

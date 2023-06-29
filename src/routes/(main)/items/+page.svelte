@@ -6,7 +6,7 @@
 </script>
 
 <section class="grid gap-5 grid-cols-[max-content_1fr]">
-	<Aside />
+	<Aside categories={data.categories} />
 
 	<div class="h-fit grid gap-10 grid-cols-4">
 		{#each data.items as item (item.id)}

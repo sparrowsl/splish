@@ -15,7 +15,7 @@ export async function POST({ request }) {
 				password: await bcrypt.hash(password, 10),
 			},
 		});
-		return json(user);
+		return json({ user });
 	} catch (error) {
 		return json({ message: "Could not create the user:" });
 	}

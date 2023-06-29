@@ -17,5 +17,5 @@ export async function GET({ params }) {
 		},
 	});
 
-	return json(item);
+	return json({ item });
 }
