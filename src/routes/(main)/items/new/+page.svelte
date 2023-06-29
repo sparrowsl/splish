@@ -8,7 +8,7 @@
 	export let data;
 </script>
 
-<form action="" method="post" use:enhance class="max-w-3xl pb-10" enctype="multipart/form-data">
+<form action="" method="POST" use:enhance class="max-w-3xl pb-10" enctype="multipart/form-data">
 	<fieldset class="grid gap-5">
 		<legend class="font-bold text-xl mb-5">Add New Item</legend>
 

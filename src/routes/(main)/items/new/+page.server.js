@@ -1,17 +1,16 @@
-import prisma from "$lib/server/prisma.js";
-import { uploadFile } from "$lib/utils/upload";
 import { redirect } from "@sveltejs/kit";
+import prisma from "$lib/server/prisma.js";
+import { uploadFile } from "$lib/utils/upload.js";
 
 async function seedCategories() {
 	await prisma.category.deleteMany();
-
 	// const res = await fetch("https://dummyjson.com/products/categories");
-	// const data = await res.json();
-
 	// const categories = [...["clothes", "trousers", "pants", "shorts"], ...data];
 	["Clothes", "Furnitures", "Toys"].forEach(async (categ) => {
 		try {
-			await prisma.category.create({ data: { name: categ } });
+			await prisma.category.create({
+				data: { name: categ },
+			});
 		} catch (error) {}
 	});
 }
@@ -46,7 +45,7 @@ export const actions = {
 				categoryId,
 			}),
 		});
-		// const item = await res.json();
+		// const data = await res.json();
 
 		if (!res.ok) return { error: "Could not upload the file or create new item!!" };
 

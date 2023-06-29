@@ -1,5 +1,5 @@
 <script>
-	import Aside from "./Aside.svelte";
+	import Aside from "$lib/components/Aside.svelte";
 
 	/** @type {import('./$types').PageData} */
 	export let data;
@@ -8,14 +8,14 @@
 <section class="grid gap-5 grid-cols-[max-content_1fr]">
 	<Aside />
 
-	<div class="grid gap-10 grid-cols-4">
+	<div class="h-fit grid gap-10 grid-cols-4">
 		{#each data.items as item (item.id)}
 			<a href="/items/{item.id}">
 				<figure class="border rounded h-fit shadow hover:shadow-lg">
 					<img src={`/uploads/${item.image}`} alt={item.name} class="object-center h-52 w-full" />
 					<figcaption class="p-3">
 						<h3>{item.name}</h3>
-						<p>${item.price.toLocaleString()}</p>
+						<p class="text-gray-600">price: ${item.price}</p>
 					</figcaption>
 				</figure>
 			</a>
