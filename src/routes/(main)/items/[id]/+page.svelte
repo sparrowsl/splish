@@ -1,8 +1,8 @@
 <script>
 	import dayjs from "dayjs";
 
+	/** @type {import('./$types').PageData} */
 	export let data;
-	// console.log(data);
 </script>
 
 <figure class="grid gap-10 grid-cols-2">
