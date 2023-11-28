@@ -1,8 +1,8 @@
 {
 	"version": "5",
 	"dialect": "sqlite",
-	"id": "fa425180-3954-4e4c-89bc-350fe64e3a72",
-	"prevId": "00000000-0000-0000-0000-000000000000",
+	"id": "49aef3dd-bc4d-4ed2-9fea-df778b8f1991",
+	"prevId": "fa425180-3954-4e4c-89bc-350fe64e3a72",
 	"tables": {
 		"categories": {
 			"name": "categories",
@@ -10,7 +10,7 @@
 				"id": {
 					"name": "id",
 					"type": "text",
-					"primaryKey": false,
+					"primaryKey": true,
 					"notNull": true,
 					"autoincrement": false
 				},
@@ -39,7 +39,7 @@
 				"id": {
 					"name": "id",
 					"type": "text",
-					"primaryKey": false,
+					"primaryKey": true,
 					"notNull": true,
 					"autoincrement": false
 				},
@@ -107,7 +107,7 @@
 				"id": {
 					"name": "id",
 					"type": "text",
-					"primaryKey": false,
+					"primaryKey": true,
 					"notNull": true,
 					"autoincrement": false
 				},
@@ -115,7 +115,7 @@
 					"name": "name",
 					"type": "text",
 					"primaryKey": false,
-					"notNull": true,
+					"notNull": false,
 					"autoincrement": false
 				},
 				"username": {
@@ -129,7 +129,7 @@
 					"name": "email",
 					"type": "text",
 					"primaryKey": false,
-					"notNull": true,
+					"notNull": false,
 					"autoincrement": false
 				},
 				"password": {

@@ -6,6 +6,8 @@
 	/** @type {import('./$types').ActionData} */
 	export let form;
 	let loading = false;
+
+	$: console.log(form);
 </script>
 
 <svelte:head>
@@ -29,25 +31,14 @@
 	<fieldset class="grid gap-5">
 		<legend class="font-bold text-center text-xl mb-5 text-gray-700">Login</legend>
 
-		<label for="" class="text-sm text-gray-600 block">
-			Email
-			<Input type="email" name="email" placeholder="Email" />
-		</label>
+		<Input label="Email" type="email" name="email" placeholder="Email" />
+		<Input label="Password" type="password" name="password" placeholder="password" />
 
-		<label for="" class="text-sm text-gray-600 block">
-			Password
-			<Input type="password" name="password" placeholder="password" />
-		</label>
-
-		{#if form?.error}
+		<!-- {#if form?.error}
 			<small class="text-center text-red-500 italic">{form.error}</small>
-		{/if}
+		{/if} -->
 
-		<Button
-			type="submit"
-			disabled={loading}
-			classes="opensans {loading && 'animate-pulse disabled:cursor-wait'}"
-		>
+		<Button disabled={loading} class="opensans {loading && 'animate-pulse disabled:cursor-wait'}">
 			{loading ? "..." : "Login"}
 		</Button>
 	</fieldset>

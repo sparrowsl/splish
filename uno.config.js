@@ -1,10 +1,4 @@
-import {
-	defineConfig,
-	presetIcons,
-	presetUno,
-	presetWebFonts,
-	transformerVariantGroup
-} from "unocss";
+import { defineConfig, presetIcons, presetUno, presetWebFonts, transformerVariantGroup } from "unocss";
 import extractorSvelte from "@unocss/extractor-svelte";
 import { presetForms } from "@julr/unocss-preset-forms";
 
@@ -21,16 +15,16 @@ export default defineConfig({
 				opensans: [
 					{
 						name: "Open Sans",
-						weights: ["300", "400", "500"]
-					}
+						weights: ["300", "400", "500"],
+					},
 				],
 				roboto: [
 					{
 						name: "Roboto",
-						weights: ["300", "400", "500"]
-					}
-				]
-			}
-		})
-	]
+						weights: ["300", "400", "500"],
+					},
+				],
+			},
+		}),
+	],
 });

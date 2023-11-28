@@ -1,39 +1,40 @@
+import { JWT_SECRET_KEY } from "$env/static/private";
+import db from "$lib/server/db/drizzle.js";
+import { usersTable } from "$lib/server/db/schema.js";
 import { redirect } from "@sveltejs/kit";
-import prisma from "$lib/server/prisma";
-
-/** @type {import('./$types').PageServerLoad} */
-export async function load({}) {}
+import { eq, or } from "drizzle-orm";
+import jwt from "jsonwebtoken";
+import { nanoid } from "nanoid";
 
 /** @type {import('./$types').Actions} */
 export const actions = {
-	default: async ({ request, cookies, fetch }) => {
-		const form = await request.formData();
-		const name = form.get("name")?.toString() ?? "";
-		const username = form.get("username")?.toString() ?? "";
-		const email = form.get("email")?.toString() ?? "";
-		const password = form.get("password")?.toString() ?? "";
+	default: async ({ request, cookies }) => {
+		const form = Object.fromEntries(await request.formData());
 
 		// Check if username exists
-		const userExists = await prisma.user.findFirst({
-			where: { username, email },
+		const usernameExists = await db.query.usersTable.findFirst({
+			where: or(
+				eq(usersTable.username, form.username.toString()),
+				eq(usersTable.email, form.email.toString()),
+			),
 		});
-		if (userExists) return { error: "Username or Email already exists!!" };
+		if (usernameExists) return { error: "Username or Email already exists!!" };
 
-		const res = await fetch("/api/users", {
-			method: "POST",
-			body: JSON.stringify({ name, username, email, password }),
-		});
-		const data = await res.json();
+		// Create a new user
+		const user = (
+			await db
+				.insert(usersTable)
+				.values({ id: nanoid(), ...Object(form) })
+				.returning({ id: usersTable.id })
+		)[0];
 
-		if (!res.ok) return { error: data.message };
-
-		// Set cookies
-		cookies.set("splish", data.id, {
+		cookies.set("token", jwt.sign(user.id, JWT_SECRET_KEY), {
 			path: "/",
 			httpOnly: true,
 			sameSite: "strict",
 			maxAge: 60 * 60 * 24 * 7,
 		});
-		throw redirect(302, "/items");
+
+		throw redirect(307, "/items");
 	},
 };

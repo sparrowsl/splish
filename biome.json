@@ -1,25 +1,44 @@
 {
-  "$schema": "https://biomejs.dev/schemas/1.4.0/schema.json",
-  "organizeImports": {
-    "enabled": true
-  },
-  "formatter":{
-    "lineWidth": 110
-  },
-  "linter": {
-    "enabled": true,
-    "rules": {
-      "recommended": true,
-      "correctness":{
-        "recommended": true
-      }
-    }
-  },
-  "javascript":{
-    "formatter":{
-      "bracketSameLine": true,
-      "enabled": true,
-      "lineWidth":110
-    }
-  }
+	"$schema": "https://biomejs.dev/schemas/1.4.0/schema.json",
+	"organizeImports": {
+		"enabled": true
+	},
+	"formatter": {
+		"lineWidth": 110,
+		"ignore": ["node_modules", ".svelte-kit", "build", "package-lock.json"]
+	},
+	"linter": {
+		"ignore": ["node_modules", ".svelte-kit", "build", "package-lock.json"],
+		"enabled": true,
+		"rules": {
+			"recommended": true,
+			"correctness": {
+				"recommended": true
+			},
+			"style": {
+				"recommended": true
+			},
+			"security": {
+				"recommended": true
+			},
+			"performance": {
+				"recommended": true
+			},
+			"a11y": {
+				"recommended": true
+			},
+			"suspicious": {
+				"recommended": true
+			},
+			"complexity": {
+				"recommended": true
+			}
+		}
+	},
+	"javascript": {
+		"formatter": {
+			"bracketSameLine": true,
+			"enabled": true
+		}
+	}
 }

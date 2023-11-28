@@ -9,8 +9,8 @@
 		"check": "svelte-kit sync && svelte-check --tsconfig ./jsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./jsconfig.json --watch",
 		"test": "vitest run",
-		"lint": "npx @biomejs/biome lint --apply ./src",
-		"format": "npx @biomejs/biome format --write ./src",
+		"lint": "npx @biomejs/biome lint --apply .",
+		"format": "npx @biomejs/biome format --write .",
 		"migrate": "drizzle-kit generate:sqlite",
 		"db:push": "drizzle-kit push:sqlite"
 	},
@@ -36,6 +36,8 @@
 		"better-sqlite3": "^9.1.1",
 		"dayjs": "^1.11.7",
 		"drizzle-orm": "^0.29.0",
+		"jsonwebtoken": "^9.0.2",
+		"nanoid": "^5.0.3",
 		"zod": "^3.20.6"
 	}
 }
