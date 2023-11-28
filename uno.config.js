@@ -3,9 +3,10 @@ import {
 	presetIcons,
 	presetUno,
 	presetWebFonts,
-	transformerVariantGroup,
+	transformerVariantGroup
 } from "unocss";
 import extractorSvelte from "@unocss/extractor-svelte";
+import { presetForms } from "@julr/unocss-preset-forms";
 
 export default defineConfig({
 	extractors: [extractorSvelte()],
@@ -13,22 +14,23 @@ export default defineConfig({
 	presets: [
 		presetIcons(),
 		presetUno(),
+		presetForms({ strategy: "base" }),
 		presetWebFonts({
 			provider: "google",
 			fonts: {
 				opensans: [
 					{
 						name: "Open Sans",
-						weights: ["300", "400", "500"],
-					},
+						weights: ["300", "400", "500"]
+					}
 				],
 				roboto: [
 					{
 						name: "Roboto",
-						weights: ["300", "400", "500"],
-					},
-				],
-			},
-		}),
-	],
+						weights: ["300", "400", "500"]
+					}
+				]
+			}
+		})
+	]
 });

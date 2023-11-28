@@ -15,7 +15,7 @@ export async function uploadFile(image) {
 	const filePath = path.join(
 		process.cwd(),
 		"uploads",
-		`${dayjs(new Date()).format("YYYYMMDD-HHmmssSSS")}.${image?.type.split("/")[1]}`
+		`${dayjs(new Date()).format("YYYYMMDD-HHmmssSSS")}.${image?.type.split("/")[1]}`,
 	);
 
 	fs.writeFileSync(filePath, Buffer.from(await image.arrayBuffer()));

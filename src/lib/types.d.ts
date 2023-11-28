@@ -1,17 +1,17 @@
 export interface Category {
-	name: String;
-	id: String;
+	name: string;
+	id: string;
 	items: Item[];
 }
 
 export interface Item {
-	id: String;
-	name: String;
-	price: Number;
-	image: String;
-	description: String;
-	isSold: Boolean;
+	id: string;
+	name: string;
+	price: number;
+	image: string;
+	description: string;
+	isSold: boolean;
 	createdAt: Date;
-	userId: String;
-	categoryId: String;
+	userId: string;
+	categoryId: string;
 }

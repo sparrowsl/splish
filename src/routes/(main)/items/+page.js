@@ -6,9 +6,7 @@ export async function load({ fetch }) {
 	const cats = await fetch("/api/categories");
 	const catData = await cats.json();
 
-	const onSaleItems = data.items.filter(
-		(/**@type {import("$lib/types.js").Item} */ item) => !item.isSold
-	);
+	const onSaleItems = data.items.filter((/**@type {import("$lib/types.js").Item} */ item) => !item.isSold);
 	return {
 		items: onSaleItems.slice(0, 6),
 		// categories: ["Clothes", "Furnitures", "Toys"],

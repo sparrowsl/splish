@@ -1,12 +1,10 @@
-import UnoCSS from "unocss/vite";
 import { sveltekit } from "@sveltejs/kit/vite";
-import { defineConfig, searchForWorkspaceRoot } from "vite";
+import unocss from "unocss/vite";
+import { searchForWorkspaceRoot } from "vite";
+import { defineConfig } from "vitest/config";
 
 export default defineConfig({
-	plugins: [sveltekit(), UnoCSS()],
-	server: {
-		fs: {
-			allow: [searchForWorkspaceRoot(process.cwd()), "/uploads"],
-		},
-	},
+	plugins: [sveltekit(), unocss()],
+	server: { fs: { allow:[searchForWorkspaceRoot(process.cwd()), "/uploads"] }},
+	test: {include: ["src/**/*.{test,spec}.{js,ts}"]}
 });
