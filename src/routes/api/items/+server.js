@@ -2,7 +2,7 @@ import { json } from "@sveltejs/kit";
 import prisma from "$lib/server/prisma";
 
 /** @type {import('./$types').RequestHandler} */
-export async function GET({}) {
+export async function GET() {
 	try {
 		const items = await prisma.item.findMany({
 			orderBy: { createdAt: "desc" },

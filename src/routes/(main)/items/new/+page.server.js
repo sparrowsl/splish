@@ -6,17 +6,17 @@ async function seedCategories() {
 	await prisma.category.deleteMany();
 	// const res = await fetch("https://dummyjson.com/products/categories");
 	// const categories = [...["clothes", "trousers", "pants", "shorts"], ...data];
-	["Clothes", "Furnitures", "Toys"].forEach(async (categ) => {
+	for (const name of ["Clothes", "Furnitures", "Toys"]) {
 		try {
 			await prisma.category.create({
-				data: { name: categ },
+				data: { name },
 			});
 		} catch (error) {}
-	});
+	}
 }
 
 /** @type {import('./$types').PageServerLoad} */
-export async function load({}) {
+export async function load() {
 	// seedCategories();
 
 	const categories = await prisma.category.findMany();
