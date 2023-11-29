@@ -14,15 +14,24 @@ export const actions = {
 	default: async ({ request, cookies }) => {
 		const form = Object.fromEntries(await request.formData());
 
-		const userEmail = await db.query.usersTable.findFirst({
+		// Check if the user email exists or display error if invalid
+		const userExists = await db.query.usersTable.findFirst({
 			where: eq(usersTable.email, form?.email.toString()),
+			columns: {
+				id: true,
+				password: true,
+			},
 		});
-		if (!userEmail) return { error: "Invalid email or password!!" };
+		if (!userExists) return { error: "Invalid email or password!!" };
 
-		const validPassword = await bcrypt.compare(form?.password.toString(), userEmail.password);
+		// Compare password, display error if invalid password
+		const validPassword = await bcrypt.compare(
+			form?.password.toString(),
+			userExists.password,
+		);
 		if (!validPassword) return { error: "Invalid email or password" };
 
-		cookies.set("token", jwt.sign(userEmail.id, JWT_SECRET_KEY), {
+		cookies.set("token", jwt.sign(userExists.id, JWT_SECRET_KEY), {
 			path: "/",
 			httpOnly: true,
 			sameSite: "strict",

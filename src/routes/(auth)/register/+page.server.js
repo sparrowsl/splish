@@ -21,14 +21,16 @@ export const actions = {
 		});
 		if (usernameExists) return { error: "Username or Email already exists!!" };
 
-		// Create a new user
 		const user = (
 			await db
 				.insert(usersTable)
 				.values({
+					// @ts-ignore
 					id: nanoid(),
 					password: await bcrypt.hash(form.password.toString(), 12),
-					...Object(form),
+					username: form.username,
+					email: form.email,
+					name: form.name,
 				})
 				.returning({ id: usersTable.id })
 		)[0];
