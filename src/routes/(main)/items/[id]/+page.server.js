@@ -9,6 +9,8 @@ export async function load({ params }) {
 		where: eq(itemsTable.id, params.id),
 	});
 
+	// TODO: get related items by category
+
 	if (!item) throw redirect(307, "/");
 
 	return { item };

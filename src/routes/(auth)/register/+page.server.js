@@ -2,6 +2,7 @@ import { JWT_SECRET_KEY } from "$env/static/private";
 import db from "$lib/server/db/drizzle.js";
 import { usersTable } from "$lib/server/db/schema.js";
 import { redirect } from "@sveltejs/kit";
+import bcrypt from "bcrypt";
 import { eq, or } from "drizzle-orm";
 import jwt from "jsonwebtoken";
 import { nanoid } from "nanoid";
@@ -24,7 +25,11 @@ export const actions = {
 		const user = (
 			await db
 				.insert(usersTable)
-				.values({ id: nanoid(), ...Object(form) })
+				.values({
+					id: nanoid(),
+					password: await bcrypt.hash(form.password.toString(), 12),
+					...Object(form),
+				})
 				.returning({ id: usersTable.id })
 		)[0];
 

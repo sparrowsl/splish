@@ -8,16 +8,13 @@ export async function load() {
 		limit: 6,
 		orderBy: desc(itemsTable.createdAt),
 	});
-	// const res = await fetch("/api/items");
-	// const data = await res.json();
 
-	// const cats = await fetch("/api/categories");
-	// const catData = await cats.json();
+	const getCategories = async () => await db.query.categoriesTable.findMany();
 
-	// const onSaleItems = data.items.filter((/**@type {import("$lib/types.js").Item} */ item) => !item.isSold);
 	return {
 		items,
-		categories: ["Clothes", "Furnitures", "Toys"],
-		// categories: catData.categories,
+		streamed: {
+			categories: getCategories(),
+		},
 	};
 }
