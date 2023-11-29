@@ -25,10 +25,7 @@ export const actions = {
 		if (!userExists) return { error: "Invalid email or password!!" };
 
 		// Compare password, display error if invalid password
-		const validPassword = await bcrypt.compare(
-			form?.password.toString(),
-			userExists.password,
-		);
+		const validPassword = await bcrypt.compare(form?.password.toString(), userExists.password);
 		if (!validPassword) return { error: "Invalid email or password" };
 
 		cookies.set("token", jwt.sign(userExists.id, JWT_SECRET_KEY), {
