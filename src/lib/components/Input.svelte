@@ -1,5 +1,4 @@
 <script>
-	// @ts-nocheck
 	export let type = "text";
 	export let name = "";
 	export let placeholder = "";
@@ -25,7 +24,7 @@
 		{placeholder}
 		{required}
 		{value}
-		on:input={(/** @type {any} */ e) => (value = e.target.value)}
+		on:input={(/** @type {Event|any} */ e) => (value = e.target?.value)}
 		class="{$$props.class} block rounded text-sm w-full p-2"
 	/>
 </label>

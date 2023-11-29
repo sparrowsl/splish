@@ -9,7 +9,7 @@
 <section class="grid gap-5 grid-cols-[max-content_1fr]">
 	<Aside categories={data.categories} />
 
-	<div class="h-fit grid gap-10 grid-cols-4">
+	<div class="h-fit grid gap-10 grid-cols-3 lg:grid-cols-4">
 		{#each data.items as item (item.id)}
 			<a href="/items/{item.id}"><ItemCard {item} /></a>
 		{:else}
