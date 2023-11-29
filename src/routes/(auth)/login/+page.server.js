@@ -19,7 +19,10 @@ export const actions = {
 		});
 		if (!userEmail) return { error: "Invalid email or password!!" };
 
-		const validPassword = await bcrypt.compare(form?.password.toString(), userEmail.password);
+		const validPassword = await bcrypt.compare(
+			form?.password.toString(),
+			userEmail.password,
+		);
 		if (!validPassword) return { error: "Invalid email or password" };
 
 		cookies.set("token", jwt.sign(userEmail.id, JWT_SECRET_KEY), {

@@ -1,7 +1,8 @@
 <script>
 	import Aside from "$lib/components/Aside.svelte";
+	import ItemCard from "./ItemCard.svelte";
 
-	/** @type {import('./$types').PageData} */
+	/** @type {import('./$types').PageServerData} */
 	export let data;
 </script>
 
@@ -10,17 +11,9 @@
 
 	<div class="h-fit grid gap-10 grid-cols-4">
 		{#each data.items as item (item.id)}
-			<a href="/items/{item.id}">
-				<figure class="border rounded h-fit shadow hover:shadow-lg">
-					<img src={`/uploads/${item.image}`} alt={item.name} class="object-cover h-52 w-full" />
-					<figcaption class="p-3">
-						<h3>{item.name}</h3>
-						<p class="text-gray-600">price: ${item.price}</p>
-					</figcaption>
-				</figure>
-			</a>
+			<a href="/items/{item.id}"><ItemCard {item} /></a>
 		{:else}
-			<p>No Items added yet!!</p>
+			<p class="text-gray-500">No Items added yet!!</p>
 		{/each}
 	</div>
 </section>
