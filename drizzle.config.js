@@ -7,6 +7,6 @@ export default {
 	strict: true,
 	verbose: true,
 	dbCredentials: {
-		url: "./sqlite.db",
+		url: "./dev.db",
 	},
 };

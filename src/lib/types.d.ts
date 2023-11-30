@@ -8,12 +8,12 @@ export interface Item {
 	id?: string;
 	name: string;
 	price: number | null;
-	image: string | null;
+	image?: string | null;
 	description: string;
-	isSold: boolean | null;
-	createdAt: Date | string | null;
+	isSold?: boolean | undefined | null;
+	createdAt?: Date | string | null | undefined;
 	userId?: string;
-	categoryId?: string;
+	categoryId?: string | null;
 }
 
 export interface User {
@@ -23,6 +23,6 @@ export interface User {
 	email?: string | null;
 	password: string;
 	isAdmin?: boolean;
-	joined?: Date | string;
+	joined?: Date | string | null;
 	items?: Item[];
 }

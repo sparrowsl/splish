@@ -32,13 +32,16 @@ export async function load() {
 }
 
 const itemSchema = z.object({
-	id: z.string().optional(),
+	id: z.string().optional().default(nanoid),
 	name: z.string(),
 	price: z.number({ coerce: true }).default(0),
-	// image: z.string().optional().default("https://via.placeholder.com/150"),
+	image: z
+		.any(z.instanceof(File, { message: "Please select a valid file!!" }))
+		.refine((value) => value.size > 0, { message: "Please select a file" })
+		.default("https://via.placeholder.com/150"),
 	description: z.string(),
-	isSold: z.boolean().optional(),
-	createdAt: z.date().optional(),
+	categoryId: z.string(),
+	ownerId: z.string().optional(),
 });
 
 /** @type {import('./$types').Actions} */
@@ -49,26 +52,34 @@ export const actions = {
 		/** @type {import("$lib/types").Item} */
 		let newItem;
 		try {
-			// @ts-ignore
 			newItem = itemSchema.parse(form);
-			console.log(newItem);
+			console.log(newItem, typeof newItem);
 		} catch (error) {
 			console.log(error);
 			return { error: "Invalid data!!" };
 		}
 
-		await db
+		// const result = await db.insert(itemsTable).values(newItem).returning();
+
+		const result = await db
 			.insert(itemsTable)
 			.values({
-				id: nanoid(),
-				image: await uploadFile(form.image),
+				// @ts-ignore
+				id: newItem.id,
+				image: await uploadFile(newItem.image),
 				description: newItem.description,
 				name: newItem.name,
 				price: newItem.price,
+				categoryId: newItem.categoryId,
+				ownerId: "Xg1hN263vC6xXRHjg9PO5",
 			})
-			.returning();
+			.returning()
+			.catch((e) => {
+				console.log(e.message);
+				return false;
+			});
 
-		if (!newItem) return { error: "Can't create new item currently!!" };
+		if (!result) return { error: "Can't create new item currently!!" };
 
 		throw redirect(307, "/items");
 	},

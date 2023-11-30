@@ -16,7 +16,7 @@
 		<Input label="Image URL" type="file" name="image" accept=".png,.jpeg,.webp" class="border max-w-60" />
 		<label for="category">
 			<span class="text-sm text-gray-700 block">Category</span>
-			<select name="category" class="rounded text-sm w-full p-2 text-gray-700 capitalize">
+			<select name="categoryId" class="rounded text-sm w-full p-2 text-gray-700 capitalize">
 				{#await data?.streamed?.categories}
 					<option value="" disabled selected>loading...</option>
 				{:then categories}

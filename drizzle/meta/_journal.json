@@ -1,20 +1,13 @@
 {
-	"version": "5",
-	"dialect": "sqlite",
-	"entries": [
-		{
-			"idx": 0,
-			"version": "5",
-			"when": 1701166029568,
-			"tag": "0000_young_tana_nile",
-			"breakpoints": true
-		},
-		{
-			"idx": 1,
-			"version": "5",
-			"when": 1701197772343,
-			"tag": "0001_broken_butterfly",
-			"breakpoints": true
-		}
-	]
+  "version": "5",
+  "dialect": "sqlite",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "5",
+      "when": 1701327978087,
+      "tag": "0000_lumpy_next_avengers",
+      "breakpoints": true
+    }
+  ]
 }

@@ -14,7 +14,6 @@ export const usersTable = sqliteTable("users", {
 export const categoriesTable = sqliteTable("categories", {
 	id: text("id").notNull().unique().primaryKey(),
 	name: text("name").notNull(),
-	// items:
 });
 
 export const itemsTable = sqliteTable("items", {
@@ -25,9 +24,12 @@ export const itemsTable = sqliteTable("items", {
 	description: text("description").notNull(),
 	isSold: integer("is_sold", { mode: "boolean" }).default(false),
 	createdAt: text("created_at").default(sql`CURRENT_TIMESTAMP`),
-
-	// categoryId String?
-	// Category   Category? @relation(fields: [categoryId], references: [id], onDelete: Cascade)
-	// userId     String?
-	// User       User?     @relation(fields: [userId], references: [id], onDelete: Cascade)
+	ownerId: text("owner_id")
+		.notNull()
+		.references(() => usersTable.id, { onDelete: "cascade" })
+		.default("NULL"),
+	categoryId: text("category_id")
+		.notNull()
+		.references(() => categoriesTable.id, { onDelete: "set default" })
+		.default("NULL"),
 });
